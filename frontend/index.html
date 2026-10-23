@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F3EC" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>小树洞 · 六年级心事陪伴</title>
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/chat.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="26" height="26" fill="none">
+            <path d="M20 34V19" stroke="#2E9B8C" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M20 22c-6 0-9-3.4-9-8 0-3 2-5.5 5-6.5 1.2-2.6 3.6-4 6.5-4 4 0 6.8 2.6 7.2 6.3 2.6 1 4.3 3.3 4.3 6.1 0 3.9-3.2 6.1-7 6.1h-7z" fill="#CDEAE4"/>
+            <circle cx="16" cy="14" r="1.6" fill="#2E9B8C"/>
+            <circle cx="24" cy="14" r="1.6" fill="#2E9B8C"/>
+            <path d="M17 17.4c1.8 1.6 4.4 1.6 6.2 0" stroke="#2E9B8C" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>小树洞</h1>
+          <p>六年级心事陪伴 · AI 伙伴</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-toggle" id="btn-settings" type="button" aria-label="配置模型 Key" title="配置模型 Key">
+          <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true">
+            <circle cx="7.6" cy="7.6" r="3.6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10.3 10.3L16.2 16.2M13.8 12.2l1.5 1.5M15.4 10.6l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="ghost-btn" id="btn-new" type="button">新对话</button>
+        <button class="ghost-btn" id="btn-intro" type="button">使用约定</button>
+        <span class="mode-chip" id="mode-chip">连接中</span>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="chat" id="chat" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <div class="welcome-illustration" aria-hidden="true">
+            <svg viewBox="0 0 120 120" width="96" height="96" fill="none">
+              <circle cx="60" cy="60" r="52" fill="#E6F4F1"/>
+              <path d="M60 92V52" stroke="#2E9B8C" stroke-width="4" stroke-linecap="round"/>
+              <path d="M60 58c-14 0-21-8-21-19 0-7 4.6-12.8 11.6-15.2C53.4 17.8 59 15 65.8 15c9.3 0 15.8 6 16.8 14.6C88.6 31.8 92.5 37 92.5 43.4c0 9-7.4 14.6-16.2 14.6H60z" fill="#CDEAE4"/>
+              <circle cx="52" cy="43" r="3.2" fill="#2E9B8C"/>
+              <circle cx="68" cy="43" r="3.2" fill="#2E9B8C"/>
+              <path d="M54 50c3.4 3 8.6 3 12 0" stroke="#2E9B8C" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="60" cy="99" rx="16" ry="5" fill="#D9C9B6" opacity=".45"/>
+            </svg>
+          </div>
+          <h2>今天有什么想说的吗？</h2>
+          <p class="welcome-sub">考试、升学、和同学或爸妈的事，都可以慢慢说。我不评判，也不着急给答案。</p>
+          <div class="chips" id="chips">
+            <button class="chip" type="button" data-text="一想到考试就特别紧张，怕考不好">考试好紧张</button>
+            <button class="chip" type="button" data-text="快上初中了，我怕自己跟不上">怕上初中跟不上</button>
+            <button class="chip" type="button" data-text="最近和爸妈说话总是吵架，很委屈">和爸妈闹别扭</button>
+            <button class="chip" type="button" data-text="晚上总是睡不着，脑子停不下来">睡不着</button>
+            <button class="chip" type="button" data-text="不想去学校，觉得没意思">不想上学</button>
+          </div>
+        </div>
+      </section>
+      <div class="risk-strip" id="risk-strip" hidden></div>
+    </main>
+
+    <footer class="composer">
+      <div class="mode-tabs" role="tablist" aria-label="输入方式">
+        <button class="mode-tab is-active" data-mode="text" role="tab" aria-selected="true" type="button">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M4 4h12v9H8l-4 3V4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          文字
+        </button>
+        <button class="mode-tab" data-mode="voice" role="tab" aria-selected="false" type="button">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><rect x="7.5" y="3" width="5" height="9" rx="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 9.5a5.5 5.5 0 0 0 11 0M10 15v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          语音
+        </button>
+        <button class="mode-tab" data-mode="image" role="tab" aria-selected="false" type="button">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none"><rect x="3.5" y="4.5" width="13" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8.5" r="1.4" fill="currentColor"/><path d="M4.5 13.5l3.6-3.3 2.6 2.3 2.2-2 2.6 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          图片
+        </button>
+      </div>
+
+      <div class="panel panel-text" id="panel-text">
+        <textarea id="input" rows="1" maxlength="2000" placeholder="说说现在的心情…（Enter 发送，Shift+Enter 换行）"></textarea>
+        <button class="send-btn" id="btn-send" type="button" aria-label="发送">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M4 12l16-7-5.2 16-3.6-6.4L4 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="panel panel-voice" id="panel-voice" hidden>
+        <div class="voice-hint" id="voice-hint">按住下面的按钮说话，说完松开</div>
+        <button class="voice-btn" id="btn-voice" type="button" aria-label="按住说话">
+          <span class="voice-rings" aria-hidden="true"></span>
+          <svg viewBox="0 0 32 32" width="34" height="34" fill="none"><rect x="12" y="5" width="8" height="15" rx="4" stroke="currentColor" stroke-width="2.2"/><path d="M7 15a9 9 0 0 0 18 0M16 24v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="voice-transcript" id="voice-transcript" hidden></div>
+        <div class="voice-actions" id="voice-actions" hidden>
+          <button class="ghost-btn" id="btn-voice-cancel" type="button">重说</button>
+          <button class="primary-btn" id="btn-voice-send" type="button">发送这句话</button>
+        </div>
+        <div class="voice-fallback" id="voice-fallback" hidden>
+          这个浏览器不支持语音识别。你可以改用文字输入，或换用 Chrome / Edge 浏览器。
+        </div>
+      </div>
+
+      <div class="panel panel-image" id="panel-image" hidden>
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="选择图片">
+          <svg viewBox="0 0 40 40" width="34" height="34" fill="none"><rect x="6" y="9" width="28" height="22" rx="5" stroke="#8A8078" stroke-width="2"/><circle cx="14" cy="16" r="2.6" fill="#8A8078"/><path d="M8 27l8-7 5.6 4.8 4.6-4.2L32 27" stroke="#8A8078" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>点这里选一张图片</span>
+          <small>试卷、作业、画的画都可以</small>
+        </div>
+        <div class="image-preview" id="image-preview" hidden>
+          <img id="image-thumb" alt="待发送的图片" />
+          <button class="icon-btn" id="btn-image-remove" type="button" aria-label="移除图片">×</button>
+          <input type="text" id="image-caption" maxlength="200" placeholder="想说说这张图的什么？（可不填）" />
+          <button class="primary-btn" id="btn-image-send" type="button">发送给小树</button>
+        </div>
+        <p class="panel-tip">小提示：图片里如果有姓名、学校、住址，建议先遮住再发。</p>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+
+      <p class="disclaimer">小树是 AI 伙伴，不能替代心理老师和家长。紧急情况请拨 12356（24 小时）或 12355。</p>
+    </footer>
+  </div>
+
+  <div class="modal" id="intro-modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+      <h3 id="intro-title">在开始之前，先说三件事</h3>
+      <ul class="intro-list">
+        <li><strong>我是 AI，不是真人。</strong>我能听你说话、陪你理清心情，但不能替代心理老师、医生和家长。</li>
+        <li><strong>聊天会保密，但安全例外。</strong>如果涉及伤害自己或被人伤害，我会建议你告诉信任的大人。</li>
+        <li><strong>不用留真实信息。</strong>不用告诉我你的姓名、学校和住址，也不需要发带人脸的照片。</li>
+      </ul>
+      <p class="intro-foot">如果现在就很危险，请直接拨 12356（24 小时心理援助热线）或 110。</p>
+      <button class="primary-btn wide" id="btn-intro-ok" type="button">我知道了，开始聊</button>
+    </div>
+  </div>
+
+  <div class="modal" id="settings-modal" hidden>
+    <div class="modal-card settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <h3 id="settings-title">配置模型 Key</h3>
+      <p class="settings-note">填写后只保存在你自己的浏览器里，服务端不记录；不填就用服务端默认配置。</p>
+
+      <label class="field">
+        <span>平台预设</span>
+        <select id="cfg-platform">
+          <option value="zhipu">智谱 GLM</option>
+          <option value="bailian">阿里云百炼</option>
+          <option value="siliconflow">硅基流动 SiliconFlow</option>
+          <option value="custom">自定义</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>API Key</span>
+        <span class="key-row">
+          <input type="password" id="cfg-key" placeholder="粘贴你的 Key" autocomplete="off" spellcheck="false" />
+          <button class="ghost-btn tiny" id="cfg-toggle-key" type="button">显示</button>
+        </span>
+      </label>
+
+      <label class="field">
+        <span>接口地址 Base URL</span>
+        <input type="text" id="cfg-base" spellcheck="false" />
+      </label>
+
+      <div class="field-row">
+        <label class="field"><span>文本模型</span><input type="text" id="cfg-model" spellcheck="false" /></label>
+        <label class="field"><span>图片模型</span><input type="text" id="cfg-vlm" spellcheck="false" /></label>
+      </div>
+
+      <label class="field">
+        <span>思考模式</span>
+        <select id="cfg-thinking">
+          <option value="disabled">关闭思考（推荐，省额度）</option>
+          <option value="off">不发送该参数</option>
+          <option value="low">low</option>
+          <option value="high">high</option>
+          <option value="max">max</option>
+        </select>
+      </label>
+
+      <div class="field-row">
+        <label class="field"><span>语音合成模型</span><input type="text" id="cfg-tts-model" spellcheck="false" /></label>
+        <label class="field"><span>音色</span><input type="text" id="cfg-tts-voice" spellcheck="false" /></label>
+      </div>
+
+      <label class="field check-field">
+        <input type="checkbox" id="cfg-autoread" />
+        <span>自动朗读小树的回复</span>
+      </label>
+
+      <p class="settings-status" id="cfg-status" hidden></p>
+
+      <div class="settings-actions">
+        <button class="ghost-btn" id="btn-cfg-clear" type="button">清除配置</button>
+        <button class="ghost-btn" id="btn-cfg-test" type="button">测试连接</button>
+        <button class="primary-btn" id="btn-cfg-save" type="button">保存并使用</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分享网关会缓存 HTML，缓存副本不带 Set-Cookie，会导致 JS/CSS 403 白屏。
+       这里做一次自愈：模块没跑起来就带缓存击穿参数重载一次（同一会话只试一次）。 -->
+  <script>
+    window.__appReady = false;
+    window.setTimeout(function () {
+      if (window.__appReady) return;
+      try {
+        if (sessionStorage.getItem('wb_rsc_retry') === '1') return;
+        sessionStorage.setItem('wb_rsc_retry', '1');
+      } catch (e) { /* 隐私模式忽略 */ }
+      var url = new URL(window.location.href);
+      url.searchParams.set('_t', String(Date.now()));
+      window.location.replace(url.toString());
+    }, 1800);
+  </script>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

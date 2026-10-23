@@ -1,0 +1,7 @@
+fastapi==0.158.2
+uvicorn[standard]==0.54.0
+openai==3.36.0
+pydantic==2.14.1
+pydantic-settings==2.16.1
+jieba==0.42.1
+python-multipart==0.0.32
